@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -79,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     marginTop: 'auto',
-
     bottom: '0px',
     width: '100%',
     padding: theme.spacing(3, 2),
@@ -360,7 +359,7 @@ export default function Album () {
           </ListItem>
           <ListItem button>
             <ListItemIcon><ChromeReaderModeIcon /></ListItemIcon>
-            <Link href='/home' className={classes.link}>Minhas solicitações</Link>
+            <Link href='/pedidos' className={classes.link}>Minhas solicitações</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><PeopleIcon /></ListItemIcon>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -21,7 +21,10 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode'
 import HomeIcon from '@material-ui/icons/Home'
-import axios from 'axios'
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
 
 const drawerWidth = 240
 
@@ -29,7 +32,7 @@ function Copyright () {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color='inherit' href='https://material-ui.com/'>
+      <Link color='inherit' href=''>
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -77,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     marginTop: 'auto',
+    position: 'absolute',
     bottom: '0px',
     width: '100%',
     padding: theme.spacing(3, 2),
@@ -85,8 +89,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 28,
     alignText: 'center',
-    padding: '20px',
-    color: 'black'
+    padding: '10px'
   },
   toolbar: {
     backgroundColor: '#1BB954',
@@ -155,12 +158,48 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     padding: '10px'
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  avatar: {
+    margin: theme.spacing(3),
+    backgroundColor: '#1BB954'
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    backgroundColor: '#1BB954',
+    margin: theme.spacing(3, 0, 2),
+    color: '#fff',
+    fontFamily: 'Nunito',
+    fontSize: '18px',
+    '&:hover': {
+      backgroundColor: '#1f9b4a'
+
+    }
+  },
+  notRegistered: {
+    textAlign: 'center',
+    fontFamily: 'Nunito'
+  },
+  link: {
+    color: 'black',
+    textDecoration: 'none'
+  },
+  cardEmprestimo: {
+    marginLeft: '15px',
+    padding: '5px'
   }
 }))
 
 export default function Album () {
   const classes = useStyles()
-  const [products, setProducts] = useState([])
   const [open, setOpen] = React.useState(false)
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -170,20 +209,7 @@ export default function Album () {
     setOpen(false)
   }
   useEffect(() => {
-    async function getProducts () {
-      try {
-        const response = await axios({
-          method: 'get',
-          url: 'https://api-agroban.herokuapp.com/products'
 
-        })
-        console.log(response.data[0].Data.Product)
-        setProducts(response.data[0].Data.Product)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getProducts()
   }, [])
 
   return (
@@ -217,44 +243,51 @@ export default function Album () {
         <Container className={classes.cardGrid} maxWidth='md'>
           <Grid container spacing={2}>
             <Typography variant='h6' className={classes.title}>
-                Lista Produtos
+                Lista de Empréstimos
             </Typography>
             <Grid item xs={12} md={12}>
 
-              <div className={classes.demo}>
-                <List>
+              <Grid item xs={12} sm={12} md={12}>
+                <Card className={classes.card}>
 
-                  <ListItem>
-                    <Link
-                      className={classes.title}
-                      href='/cadastrarPedido'
-                    >
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant='h5' component='h2'>
+                      Credito agricola
+                    </Typography>
+                    <Typography className={classes.cardEmprestimo}>
+                      Valor: 3000.00 R$
+                    </Typography>
+                    <Typography className={classes.cardEmprestimo}>
+                      Proximo pagamento - 30/08/2020
+                    </Typography>
 
-                      {'Crédito Rural'}
-                    </Link>
-                  </ListItem>
-                </List>
-              </div>
-            </Grid>
-            {products.map((product) => (
-              <Grid item xs={12} md={12} key={product}>
-
-                <div className={classes.demo}>
-                  <List>
-
-                    <ListItem>
-                      <Link
-                        className={classes.title}
-                        href='/cadastrarPedido'
-                      >
-
-                        {product.ProductName}
-                      </Link>
-                    </ListItem>
-                  </List>
-                </div>
+                  </CardContent>
+                  <CardActions className={classes.buttonCard} />
+                </Card>
               </Grid>
-            ))}
+            </Grid>
+            <Grid item xs={12} md={12}>
+
+              <Grid item xs={12} sm={12} md={12}>
+                <Card className={classes.card}>
+
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant='h5' component='h2'>
+                      Credito agricola
+                    </Typography>
+                    <Typography className={classes.cardEmprestimo}>
+                      Valor: 3000.00 R$
+                    </Typography>
+                    <Typography className={classes.cardEmprestimo}>
+                      Proximo pagamento - 30/08/2020
+                    </Typography>
+
+                  </CardContent>
+                  <CardActions className={classes.buttonCard} />
+                </Card>
+              </Grid>
+            </Grid>
+
           </Grid>
         </Container>
       </main>
@@ -277,11 +310,11 @@ export default function Album () {
 
           <ListItem button>
             <ListItemIcon><HomeIcon /></ListItemIcon>
-            <ListItemText primary='Início ' />
+            <Link href='/home' className={classes.link}>Início</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><ChromeReaderModeIcon /></ListItemIcon>
-            <ListItemText primary='Minhas solicitações' />
+            <Link href='/home' className={classes.link}>Minhas solicitações</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><PeopleIcon /></ListItemIcon>
