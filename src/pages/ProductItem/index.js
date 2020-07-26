@@ -155,6 +155,10 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     padding: '10px'
+  },
+  link: {
+    color: 'black',
+    textDecoration: 'none'
   }
 }))
 
@@ -277,11 +281,11 @@ export default function Album () {
 
           <ListItem button>
             <ListItemIcon><HomeIcon /></ListItemIcon>
-            <ListItemText primary='Início ' />
+            <Link href='/home' className={classes.link}>Início</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><ChromeReaderModeIcon /></ListItemIcon>
-            <ListItemText primary='Minhas solicitações' />
+            <Link href='/pedidos' className={classes.link}>Minhas solicitações</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><PeopleIcon /></ListItemIcon>

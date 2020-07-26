@@ -314,7 +314,7 @@ export default function Album () {
           </ListItem>
           <ListItem button>
             <ListItemIcon><ChromeReaderModeIcon /></ListItemIcon>
-            <Link href='/home' className={classes.link}>Minhas solicitações</Link>
+            <Link className={classes.link}>Minhas solicitações</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><PeopleIcon /></ListItemIcon>
