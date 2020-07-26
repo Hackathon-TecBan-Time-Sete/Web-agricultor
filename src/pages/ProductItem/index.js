@@ -159,6 +159,13 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: 'black',
     textDecoration: 'none'
+  },
+  title2: {
+    fontSize: 20,
+    alignText: 'center',
+    padding: '10px',
+    color: 'black',
+    fontFamily: 'Nunito'
   }
 }))
 
@@ -230,7 +237,7 @@ export default function Album () {
 
                   <ListItem>
                     <Link
-                      className={classes.title}
+                      className={classes.title2}
                       href='/cadastrarPedido'
                     >
 
@@ -248,7 +255,7 @@ export default function Album () {
 
                     <ListItem>
                       <Link
-                        className={classes.title}
+                        className={classes.title2}
                         href='/cadastrarPedido'
                       >
 
