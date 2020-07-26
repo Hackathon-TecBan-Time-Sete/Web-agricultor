@@ -200,7 +200,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Album () {
+  const Xmas95 = new Date()
   const classes = useStyles()
+  var status = 'Pendente'
   const [open, setOpen] = React.useState(false)
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -211,8 +213,15 @@ export default function Album () {
   }
   useEffect(() => {
 
-  }, [])
+  }, [Xmas95])
+  setTimeout(function () {
+    console.log(status)
+    status = 'Aprovado'
 
+    document.getElementById('status').innerHTML = status
+    document.getElementById('buttonO').innerHTML = 'Ver Ofertas'
+    console.log(status)
+  }, 15000)
   return (
     <>
       <CssBaseline />
@@ -259,7 +268,7 @@ export default function Album () {
                       Data da solicitação - 30/08/2020
                     </Typography>
                     <Typography className={classes.cardEmprestimo}>
-                      Status : pendente
+                      {status}
                     </Typography>
 
                   </CardContent>
@@ -279,13 +288,10 @@ export default function Album () {
                     <Typography className={classes.cardEmprestimo}>
                       Data da solicitação - 30/08/2020
                     </Typography>
-                    <Typography className={classes.cardEmprestimo}>
-                      Status : Aprovado
+                    <Typography className={classes.cardEmprestimo} id='status'>
+                      {status}
                     </Typography>
-                    <Button size='small' color='primary' href='/ofertas' className={classes.cardEmprestimo}>
-                      Ver ofertas
-                    </Button>
-
+                    <Button id='buttonO' size='small' color='primary' href='/ofertas' className={classes.cardEmprestimo} />
                   </CardContent>
                   <CardActions className={classes.buttonCard} />
                 </Card>
