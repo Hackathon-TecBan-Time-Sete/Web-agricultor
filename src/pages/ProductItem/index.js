@@ -221,7 +221,7 @@ export default function Album () {
         <Container className={classes.cardGrid} maxWidth='md'>
           <Grid container spacing={2}>
             <Typography variant='h6' className={classes.title}>
-                Lista Produtos
+                Lista de Produtos
             </Typography>
             <Grid item xs={12} md={12}>
 
