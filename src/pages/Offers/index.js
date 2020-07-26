@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -24,6 +24,7 @@ import HomeIcon from '@material-ui/icons/Home'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
+import axios from 'axios'
 import Button from '@material-ui/core/Button'
 
 const drawerWidth = 240
@@ -80,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     marginTop: 'auto',
-    position: 'absolute',
     bottom: '0px',
     width: '100%',
     padding: theme.spacing(3, 2),
@@ -194,14 +194,22 @@ const useStyles = makeStyles((theme) => ({
   },
   cardEmprestimo: {
     marginLeft: '15px',
+    padding: '5px'
+  },
+  acceptButton: {
+    color: '#white',
+    backgroundCollor: '#1BB954',
     padding: '5px',
-    color: 'black'
+    marginTop: '5px',
+    marginLeft: '15px'
   }
 }))
 
 export default function Album () {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
+  const [products, setProducts] = useState([])
+  const [Offers, setOffers] = useState([])
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -210,8 +218,22 @@ export default function Album () {
     setOpen(false)
   }
   useEffect(() => {
+    async function getProducts () {
+      try {
+        const response = await axios({
+          method: 'get',
+          url: 'https://api-agroban.herokuapp.com/products'
 
-  }, [])
+        })
+        console.log(response.data[0].Data.Product[0].BCA.Overdraft)
+        setProducts(response.data[0].Data.Product[0].BCA.Overdraft)
+        setOffers(products.OverdraftTierBandSet)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getProducts()
+  }, [products.OverdraftTierBandSet])
 
   return (
     <>
@@ -244,7 +266,7 @@ export default function Album () {
         <Container className={classes.cardGrid} maxWidth='md'>
           <Grid container spacing={2}>
             <Typography variant='h6' className={classes.title}>
-                Minhas solicitações
+                Lista de Ofertas
             </Typography>
             <Grid item xs={12} md={12}>
 
@@ -253,15 +275,21 @@ export default function Album () {
 
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant='h5' component='h2'>
-                      Credito agricola
+                      Banco A
                     </Typography>
                     <Typography className={classes.cardEmprestimo}>
-                      Data da solicitação - 30/08/2020
+                      Valor: £100.01
                     </Typography>
                     <Typography className={classes.cardEmprestimo}>
-                      Status : pendente
+                      Juros - 15.9%
                     </Typography>
+                    <Typography className={classes.cardEmprestimo}>
+                      Nota - Overdraft interest is charged at 15.9% EAR variable, and there are no additional overdraft fees.
 
+                    </Typography>
+                    <Button onClick={() => { alert('Oferta aceita') }} href='/ofertas' className={classes.acceptButton}>
+                      Aceitar Oferta
+                    </Button>
                   </CardContent>
                   <CardActions className={classes.buttonCard} />
                 </Card>
@@ -274,24 +302,26 @@ export default function Album () {
 
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant='h5' component='h2'>
-                      Credito agricola
+                      Banco B
                     </Typography>
                     <Typography className={classes.cardEmprestimo}>
-                      Data da solicitação - 30/08/2020
+                      Valor: £100.01
                     </Typography>
                     <Typography className={classes.cardEmprestimo}>
-                      Status : Aprovado
+                      Juros - 15.9%
                     </Typography>
-                    <Button size='small' color='primary' href='/ofertas' className={classes.cardEmprestimo}>
-                      Ver ofertas
-                    </Button>
+                    <Typography className={classes.cardEmprestimo}>
+                      Nota - Overdraft interest is charged at 15.9% EAR variable, and there are no additional overdraft fees.
+                    </Typography>
 
+                    <Button onClick={() => { alert('Oferta aceita') }} href='/ofertas' className={classes.acceptButton}>
+                      Aceitar Oferta
+                    </Button>
                   </CardContent>
                   <CardActions className={classes.buttonCard} />
                 </Card>
               </Grid>
             </Grid>
-
           </Grid>
         </Container>
       </main>
@@ -318,7 +348,7 @@ export default function Album () {
           </ListItem>
           <ListItem button>
             <ListItemIcon><ChromeReaderModeIcon /></ListItemIcon>
-            <Link className={classes.link}>Minhas solicitações</Link>
+            <Link href='/pedidos' className={classes.link}>Minhas solicitações</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><PeopleIcon /></ListItemIcon>
