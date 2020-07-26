@@ -151,6 +151,9 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     marginTop: '5px'
+  },
+  list: {
+    padding: '10px'
   }
 }))
 
@@ -198,37 +201,29 @@ export default function Album () {
 
         <Container className={classes.cardGrid} maxWidth='md'>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={12}>
               <Typography variant='h6' className={classes.title}>
                 Meus Pedidos
               </Typography>
               <div className={classes.demo}>
                 <List>
-
                   <ListItem>
                     <ListItemText
                       primary='Single-line item'
-
                     />
                   </ListItem>
-
                 </List>
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant='h6' className={classes.title}>
-                Produtos Bancários
-              </Typography>
+            <Grid item xs={12} md={12}>
+
               <div className={classes.demo}>
                 <List>
-
                   <ListItem>
                     <ListItemText
                       primary='Single-line item'
-
                     />
                   </ListItem>
-
                 </List>
               </div>
             </Grid>
