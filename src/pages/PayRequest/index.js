@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -24,6 +24,8 @@ import HomeIcon from '@material-ui/icons/Home'
 import Button from '@material-ui/core/Button'
 import Avatar from '@material-ui/core/Avatar'
 import TextField from '@material-ui/core/TextField'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -195,6 +197,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Album () {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
+  const [email, setEmail] = useState('')
+  const [nome, setNome] = useState('')
+  const [nomeProduto, setNomeProduto] = useState('')
+  const [dataPlantacao, setDataPlantacao] = useState('')
+  const [dataColheita, setDataColheita] = useState('')
+  const [endereco, setEndereco] = useState('')
+  console.log(dataColheita, dataPlantacao)
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -202,9 +211,34 @@ export default function Album () {
   const handleDrawerClose = () => {
     setOpen(false)
   }
-  useEffect(() => {
+  const history = useHistory()
+  async function handleCreateProductAccount (event) {
+    event.preventDefault()
 
-  }, [])
+    const data = {
+      email,
+      nome,
+      nomeProduto,
+      dataPlantacao: '2020-07-26',
+      dataColheita: '2020-07-26',
+      endereco
+    }
+
+    console.log(data)
+    try {
+      await axios({
+        method: 'POST',
+        url: 'https://api-agroban.herokuapp.com/cadastro',
+        data
+      })
+
+      alert('Produto cadastrado com sucesso.')
+      history.push('/pedidos')
+    } catch (error) {
+      console.log(error)
+      console.log(data)
+    }
+  }
 
   return (
     <>
@@ -241,7 +275,7 @@ export default function Album () {
             <Typography component='h1' variant='h5' className={classes.fontNunito}>
           Formulário de requisição
             </Typography>
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={handleCreateProductAccount}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -254,7 +288,7 @@ export default function Album () {
                     name='email'
                     autoComplete='email'
                     autoFocus
-                    // onChange={event => setEmail(event.target.value)}
+                    onChange={event => setEmail(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -267,6 +301,7 @@ export default function Album () {
                     label='Nome'
                     type='text'
                     id='name'
+                    onChange={event => setNome(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -279,6 +314,7 @@ export default function Album () {
                     label='Nome do produto de plantio'
                     type='text'
                     id='nameProduct'
+                    onChange={event => setNomeProduto(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -293,6 +329,7 @@ export default function Album () {
                       shrink: true
                     }}
                     fullWidth
+                    onChange={event => setDataPlantacao('2020-07-26')}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -307,6 +344,7 @@ export default function Album () {
                       shrink: true
                     }}
                     fullWidth
+                    onChange={event => setDataColheita(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -319,6 +357,7 @@ export default function Album () {
                     label='Endereço'
                     type='text'
                     id='address'
+                    onChange={event => setEndereco(event.target.value)}
                   />
                 </Grid>
               </Grid>

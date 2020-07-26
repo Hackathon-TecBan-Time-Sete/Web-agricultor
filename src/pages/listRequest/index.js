@@ -221,7 +221,7 @@ export default function Album () {
     document.getElementById('status').innerHTML = status
     document.getElementById('buttonO').innerHTML = 'Ver Ofertas'
     console.log(status)
-  }, 15000)
+  }, 10000)
   return (
     <>
       <CssBaseline />

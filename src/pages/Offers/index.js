@@ -210,7 +210,7 @@ export default function Album () {
   const [open, setOpen] = React.useState(false)
   const [products, setProducts] = useState([])
   const [Offers, setOffers] = useState([])
-
+  console.log(Offers)
   const handleDrawerOpen = () => {
     setOpen(true)
   }
