@@ -21,6 +21,9 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode'
 import HomeIcon from '@material-ui/icons/Home'
+import Button from '@material-ui/core/Button'
+import Avatar from '@material-ui/core/Avatar'
+import TextField from '@material-ui/core/TextField'
 
 const drawerWidth = 240
 
@@ -28,7 +31,7 @@ function Copyright () {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color='inherit' href='https://material-ui.com/'>
+      <Link color='inherit' href=''>
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -76,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     marginTop: 'auto',
-    position: 'absolute',
+
     bottom: '0px',
     width: '100%',
     padding: theme.spacing(3, 2),
@@ -85,8 +88,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 28,
     alignText: 'center',
-    padding: '20px',
-    color: 'black'
+    padding: '20px'
   },
   toolbar: {
     backgroundColor: '#1BB954',
@@ -155,6 +157,39 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     padding: '10px'
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  avatar: {
+    margin: theme.spacing(3),
+    backgroundColor: '#1BB954'
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    backgroundColor: '#1BB954',
+    margin: theme.spacing(3, 0, 2),
+    color: '#fff',
+    fontFamily: 'Nunito',
+    fontSize: '18px',
+    '&:hover': {
+      backgroundColor: '#1f9b4a'
+
+    }
+  },
+  notRegistered: {
+    textAlign: 'center',
+    fontFamily: 'Nunito'
+  },
+  link: {
+    color: 'black',
+    textDecoration: 'none'
   }
 }))
 
@@ -200,64 +235,106 @@ export default function Album () {
       </div>
       <main>
 
-        <Container className={classes.cardGrid} maxWidth='md'>
-          <Grid container spacing={2}>
-            <Typography variant='h6' className={classes.title}>
-                Lista Produtos
+        <Container component='main' maxWidth='xs'>
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar} />
+            <Typography component='h1' variant='h5' className={classes.fontNunito}>
+          Formulário de requisição
             </Typography>
-            <Grid item xs={12} md={12}>
+            <form className={classes.form}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    required
+                    fullWidth
+                    id='email'
+                    label='Email'
+                    name='email'
+                    autoComplete='email'
+                    autoFocus
+                    // onChange={event => setEmail(event.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    required
+                    fullWidth
+                    name='name'
+                    label='Nome'
+                    type='text'
+                    id='name'
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    required
+                    fullWidth
+                    name='nameProduct'
+                    label='Nome do produto de plantio'
+                    type='text'
+                    id='nameProduct'
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    id='date'
+                    label='data de plantação'
+                    type='date'
+                    defaultValue='2020-07-26'
+                    variant='outlined'
+                    margin='normal'
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    id='date'
+                    label='Data de colheita'
+                    type='date'
+                    defaultValue='2020-07-26'
+                    variant='outlined'
+                    margin='normal'
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    required
+                    fullWidth
+                    name='address'
+                    label='Endereço'
+                    type='text'
+                    id='address'
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                type='submit'
+                fullWidth
+                className={classes.submit}
 
-              <div className={classes.demo}>
-                <List>
+              >
+            Enviar
+              </Button>
 
-                  <ListItem>
-                    <Link
-                      className={classes.title}
-                      href='/cadastrarPedido'
-                    >
+            </form>
+          </div>
 
-                      {'Crédito Rural'}
-                    </Link>
-                  </ListItem>
-                </List>
-              </div>
-            </Grid>
-            <Grid item xs={12} md={12}>
-
-              <div className={classes.demo}>
-                <List>
-                  <ListItem>
-                    <Link
-                      className={classes.title}
-                      href='/cadastrarPedido'
-                    >
-
-                      {'Consórcio'}
-                    </Link>
-
-                  </ListItem>
-                </List>
-              </div>
-            </Grid>
-            <Grid item xs={12} md={12}>
-
-              <div className={classes.demo}>
-                <List>
-                  <ListItem>
-                    <Link
-                      className={classes.title}
-                      href='/cadastrarPedido'
-                    >
-
-                      {'Seguro'}
-                    </Link>
-
-                  </ListItem>
-                </List>
-              </div>
-            </Grid>
-
-          </Grid>
         </Container>
       </main>
       <Drawer
@@ -279,11 +356,11 @@ export default function Album () {
 
           <ListItem button>
             <ListItemIcon><HomeIcon /></ListItemIcon>
-            <ListItemText primary='Início ' />
+            <Link href='/home' className={classes.link}>Início</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><ChromeReaderModeIcon /></ListItemIcon>
-            <ListItemText primary='Minhas solicitações' />
+            <Link href='/home' className={classes.link}>Minhas solicitações</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon><PeopleIcon /></ListItemIcon>
