@@ -44,11 +44,10 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh'
   },
   demo: {
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: '10px'
   },
-  title: {
-    margin: theme.spacing(4, 0, 2)
-  },
+
   icon: {
     marginRight: theme.spacing(2)
   },
@@ -85,7 +84,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: 28,
-    fontFamily: 'shrikhand'
+    alignText: 'center',
+    padding: '20px'
   },
   toolbar: {
     backgroundColor: '#1BB954',
@@ -201,15 +201,16 @@ export default function Album () {
 
         <Container className={classes.cardGrid} maxWidth='md'>
           <Grid container spacing={2}>
+            <Typography variant='h6' className={classes.title}>
+                Lista Produtos
+            </Typography>
             <Grid item xs={12} md={12}>
-              <Typography variant='h6' className={classes.title}>
-                Meus Pedidos
-              </Typography>
+
               <div className={classes.demo}>
                 <List>
                   <ListItem>
                     <ListItemText
-                      primary='Single-line item'
+                      primary='Crédito Rural'
                     />
                   </ListItem>
                 </List>
@@ -221,7 +222,19 @@ export default function Album () {
                 <List>
                   <ListItem>
                     <ListItemText
-                      primary='Single-line item'
+                      primary='Consórcio'
+                    />
+                  </ListItem>
+                </List>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={12}>
+
+              <div className={classes.demo}>
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary='Seguro'
                     />
                   </ListItem>
                 </List>
